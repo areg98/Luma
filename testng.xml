@@ -3,12 +3,23 @@
 
     <test name="TestSuite" preserve-order="true">
 
+
         <parameter name="browser" value="chrome"/>
         <parameter name="Port" value="9001"/>
+        <groups>
+            <run>
+                <include name="password" />
+                <include name="labels" />
+            </run>
+        </groups>
         <classes>
             <class name="RegistrationTest"/>
             <class name="HomePageTest"/>
             <class name="SignInTest"/>
+
         </classes>
+
     </test>
+
+
 </suite>

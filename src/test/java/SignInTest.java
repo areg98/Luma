@@ -1,33 +1,44 @@
-import Pages.BasePage;
-import Pages.Header;
+import Pages.HomePageWithSignIn;
 import Pages.SignInPage;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
+import static Enums.RegistrationPageEnum.REGISTRATION_PAGE_URl;
 import static Enums.SignInPageEnum.*;
-import static Enums.RegistrationPageEnum.*;
 import static utils.CustomWebDriver.getDriver;
-import Pages.BasePage.*;
 
 public class SignInTest extends BaseTest{
+    SignInPage signInPage;
+    @BeforeMethod
+    public void before(){
+         signInPage = new SignInPage(getDriver());
+    }
 
     @Test
     public void validLogin() throws InterruptedException {
-       SignInPage signInPage = new SignInPage(getDriver());
-        Assert.assertEquals(signInPage.validSignIn(), LOGGED_IN_TEXT.getValue());
+        signInPage.validSignIn();
+        HomePageWithSignIn homePageWithSignIn = new HomePageWithSignIn(getDriver());
+        Assert.assertEquals(homePageWithSignIn.getLoggedInText(), LOGGED_IN_TEXT.getValue());
     }
 
     @Test
-    public void inValidLogin() throws InterruptedException { // Todo change to checking with error message
-        SignInPage signInPage = new SignInPage(getDriver());
-        Assert.assertEquals(signInPage.inValidSignIn(), NOT_LOGGED_IN_TEXT.getValue());
+    public void inValidLogin() throws InterruptedException {
+        Thread.sleep(2000);
+        Assert.assertEquals(signInPage.inValidSignIn(), INCORRECT_SIGN_IN_ERROR.getValue());
     }
 
     @Test
-    public void emptyLogin() throws InterruptedException { //Todo change to checking with error message
-        SignInPage signInPage = new SignInPage(getDriver());
-        Assert.assertEquals(signInPage.emptySignIn(), NOT_LOGGED_IN_TEXT.getValue());
+    public void emptyEmailLogin() throws InterruptedException { // Todo
+//        SignInPage signInPage = new SignInPage(getDriver());
+        Assert.assertEquals(signInPage.emptyEmailSignIn(), EMPTY_EMAIL_ERROR.getValue());
     }
+
+    @Test
+    public void emptyPassLogin() throws InterruptedException {
+        SignInPage signInPage = new SignInPage(getDriver());
+        Assert.assertEquals(signInPage.emptyPassSignIn(), EMPTY_PASS_ERROR.getValue());
+    }
+
 
     @Test
     public void checkBaseText() throws InterruptedException {
@@ -59,4 +70,6 @@ public class SignInTest extends BaseTest{
         signInPage.clickOnCreateAnAccountButton();
         Assert.assertEquals(getDriver().getCurrentUrl(), REGISTRATION_PAGE_URl.getValue());
     }
+
+
 }

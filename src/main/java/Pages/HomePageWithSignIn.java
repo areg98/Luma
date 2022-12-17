@@ -1,23 +1,21 @@
 package Pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.*;
 
 public class HomePageWithSignIn {
     private WebDriver driver;
+    @FindBy(css = "[class='logged-in']")
     private WebElement loggedInText;
 
     public HomePageWithSignIn(WebDriver driver){
         this.driver = driver;
-        initWebElements();
+        PageFactory.initElements(driver, this);
     }
 
-    private void initWebElements(){
-        loggedInText = driver.findElement(By.className("logged-in"));
-    }
-
-    public String getLoggedInText(){
+    public String getLoggedInText() throws InterruptedException {
+        Thread.sleep(2000);
         return loggedInText.getText();
     }
 }

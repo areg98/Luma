@@ -1,39 +1,39 @@
 package Pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import static utils.CustomWebElement.*;
+import org.openqa.selenium.support.*;
+
+import static utils.CustomWebDriver.getDriver;
+import static utils.CustomWebElement.click;
 
 public class HomePage {
     private static WebDriver driver;
+    @FindBy(css = "[class='block-promo home-main']")
     private WebElement homeMainPromo;
+    @FindBy(css = "[class = 'block-promo home-pants']")
     private WebElement homePantsPromo;
+    @FindBy(css = "[class='block-promo home-t-shirts']")
     private WebElement homeShirtsPromo;
+    @FindBy(css = "[class='block-promo home-performance']")
     private WebElement homePerformancePromo;
+    @FindBy(css = "[class='block-promo home-eco']")
     private WebElement homeEcoPromo;
+    @FindBy(css = "[class = 'block-promo home-erin']")
     private WebElement homeErinPromo;
+    @FindBy(className = "authorization-link")
     private WebElement signIn;
     private static String siteUrl = "https://magento.softwaretestingboard.com/";
 
     public HomePage(WebDriver driver){
         this.driver = driver;
-        initWebElements();
-    }
+        PageFactory.initElements(driver, this);
+     }
 
-    private void initWebElements(){
-        homeMainPromo  = driver.findElement(By.cssSelector("[class='block-promo home-main']"));
-        homePantsPromo = driver.findElement(By.cssSelector("[class = 'block-promo home-pants']"));
-        homeShirtsPromo = driver.findElement(By.cssSelector("[class='block-promo home-t-shirts']"));
-        homePerformancePromo = driver.findElement(By.cssSelector("[class='block-promo home-performance']"));
-        homeEcoPromo = driver.findElement(By.cssSelector("[class='block-promo home-eco']"));
-        homeErinPromo = driver.findElement(By.cssSelector("[class = 'block-promo home-erin']"));
-        signIn = driver.findElement(By.className("authorization-link"));
-    }
 
-    public void clickOnSignInButton(){
-        click(signIn);
-    }
+//    public void clickOnSignInButton(){
+//        click(signIn);
+//    }
 
 
     public  boolean checkHomeMainPromo(){
@@ -58,6 +58,7 @@ public class HomePage {
         click(homeShirtsPromo);
         String currentUrl = driver.getCurrentUrl();
         driver.navigate().back();
+        new HomePage(getDriver());
         if (currentUrl.equals("https://magento.softwaretestingboard.com/promotions/tees-all.html"))
             return true;
         else return false;

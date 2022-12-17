@@ -2,13 +2,16 @@ package Enums;
 
 public enum SignInPageEnum {
 
-    VALID_EMAIL("tgakmp@mail.com"),
-    VALID_PASSWORD("123Hh%Iu&"),
+    VALID_EMAIL("eublsn@mail.com"),
+    VALID_PASSWORD("646Wm%Pf$"),
     INVALID_EMAIL("email@mail.com"),
+    EMPTY_EMAIL_ERROR("This is a required field."),
+    EMPTY_PASS_ERROR("This is a required field."),
+    INCORRECT_SIGN_IN_ERROR("Incorrect CAPTCHA"),
     INVALID_PASSWORD("123456"),
     NOT_LOGGED_IN_TEXT("Default welcome msg!"),
-    FIRST_NAME("name"),
-    LAST_NAME("lastname"),
+    FIRST_NAME("Babken"),
+    LAST_NAME("Babkenyan"),
     LOGGED_IN_TEXT("Welcome, " + FIRST_NAME.getValue() + " " + LAST_NAME.getValue() + "!"),
     BASE_TEXT("Customer Login"),
     REG_CUSTOMER_TEXT("Registered Customers"),

@@ -2,13 +2,10 @@ package Pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
+import org.openqa.selenium.support.*;
 import static Enums.SignInPageEnum.*;
-import static utils.CustomWebDriver.getDriver;
-import static utils.CustomWebElement.click;
-import static utils.CustomWebElement.sendKey;
+import static utils.CustomWebDriver.*;
+import static utils.CustomWebElement.*;
 
 public class SignInPage extends BasePage {
     private WebDriver driver;
@@ -30,6 +27,12 @@ public class SignInPage extends BasePage {
     private WebElement newCustomerText;
     @FindBy(css = "[class='action create primary']")
     private WebElement createAnAccountButton;
+    @FindBy(id = "email-error")
+    private WebElement emailError;
+    @FindBy(id = "pass-error")
+    private WebElement passError;
+    @FindBy(css= "[class='message-error error message']")
+    private WebElement incorrectSignInError;
 
 
     public SignInPage(WebDriver driver) {
@@ -56,22 +59,32 @@ public class SignInPage extends BasePage {
         sendKey(passField, INVALID_PASSWORD.getValue());
         click(submitButton);
         Thread.sleep(1000);
-        return notLoggedInText.getText();
+        return incorrectSignInError.getText();
 
     }
 
-    public String emptySignIn() throws InterruptedException {
+    public String emptyEmailSignIn() throws InterruptedException {
         Thread.sleep(1000);
         sendKey(userNameField, "");
+        sendKey(passField, VALID_PASSWORD.getValue());
+        click(submitButton);
+        Thread.sleep(1000);
+        return emailError.getText();
+
+    }
+
+    public String emptyPassSignIn() throws InterruptedException {
+        Thread.sleep(1000);
+        sendKey(userNameField, VALID_EMAIL.getValue());
         sendKey(passField, "");
         click(submitButton);
         Thread.sleep(1000);
-        return notLoggedInText.getText();
+        return passError.getText();
 
     }
 
     public String getBaseText() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         return baseText.getText();
     }
 

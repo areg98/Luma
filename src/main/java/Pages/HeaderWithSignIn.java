@@ -12,8 +12,5 @@ public class HeaderWithSignIn {
         this.driver = driver;
     }
 
-    protected void initWebElements(){
-
-    }
 
 }
