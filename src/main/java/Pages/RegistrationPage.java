@@ -4,11 +4,14 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.*;
+
 import java.util.List;
+
 import static Enums.RegistrationPageEnum.*;
 import static Enums.RegistrationPageEnum.INVALID_EMAIL;
 import static Enums.SignInPageEnum.*;
 import static utils.CustomWebElement.*;
+
 import org.openqa.selenium.support.Color;
 
 public class RegistrationPage extends BasePage {
@@ -77,7 +80,6 @@ public class RegistrationPage extends BasePage {
         sendKey(pass, RANDOM_PASS.getValue());
         sendKey(confirmPass, RANDOM_PASS.getValue());
         click(createAnAccountButton);
-        Thread.sleep(1000);
         return successMessage.getText();
 
     }
@@ -89,8 +91,6 @@ public class RegistrationPage extends BasePage {
         sendKey(pass, RANDOM_PASS.getValue());
         sendKey(confirmPass, RANDOM_PASS.getValue());
         click(createAnAccountButton);
-        Thread.sleep(1000);
-
     }
 
     public void regWithOutFirstName() throws InterruptedException {
@@ -99,8 +99,6 @@ public class RegistrationPage extends BasePage {
         sendKey(pass, RANDOM_PASS.getValue());
         sendKey(confirmPass, RANDOM_PASS.getValue());
         click(createAnAccountButton);
-        Thread.sleep(1000);
-
     }
 
     public void regWithOutLastName() throws InterruptedException {
@@ -109,8 +107,6 @@ public class RegistrationPage extends BasePage {
         sendKey(pass, RANDOM_PASS.getValue());
         sendKey(confirmPass, RANDOM_PASS.getValue());
         click(createAnAccountButton);
-        Thread.sleep(1000);
-
     }
 
     public void regWithOutEmail() throws InterruptedException {
@@ -119,7 +115,6 @@ public class RegistrationPage extends BasePage {
         sendKey(pass, RANDOM_PASS.getValue());
         sendKey(confirmPass, RANDOM_PASS.getValue());
         click(createAnAccountButton);
-        Thread.sleep(1000);
     }
 
     public void regWithOutPass() throws InterruptedException {
@@ -128,7 +123,6 @@ public class RegistrationPage extends BasePage {
         sendKey(email, RANDOM_EMAIL.getValue());
         sendKey(confirmPass, RANDOM_PASS.getValue());
         click(createAnAccountButton);
-        Thread.sleep(1000);
     }
 
     public void regWithOutConfirmPass() throws InterruptedException {
@@ -137,7 +131,6 @@ public class RegistrationPage extends BasePage {
         sendKey(email, RANDOM_EMAIL.getValue());
         sendKey(pass, RANDOM_PASS.getValue());
         click(createAnAccountButton);
-        Thread.sleep(1000);
     }
 
     public void regWithDifferentPass() throws InterruptedException {
@@ -156,21 +149,21 @@ public class RegistrationPage extends BasePage {
         sendKey(pass, RANDOM_PASS.getValue());
         sendKey(confirmPass, RANDOM_PASS.getValue());
         click(createAnAccountButton);
-        Thread.sleep(1000);
     }
-    public void checkWeakPassStrength(){
+
+    public void checkWeakPassStrength() {
         sendKey(pass, INVALID_PASSWORD.getValue());
     }
 
-    public void checkMediumPassStrength(){
+    public void checkMediumPassStrength() {
         sendKey(pass, "123aaAQ!");
     }
 
-    public void checkStrongPassStrength(){
+    public void checkStrongPassStrength() {
         sendKey(pass, VALID_PASSWORD.getValue());
     }
 
-    public void checkVeryStrongPassStrength(){
+    public void checkVeryStrongPassStrength() {
         sendKey(pass, VALID_PASSWORD.getValue() + "aa");
     }
 
@@ -185,35 +178,35 @@ public class RegistrationPage extends BasePage {
     }
 
 
-    public String getUsedEmailErrorText(){
+    public String getUsedEmailErrorText() {
         return usedEmailError.getText();
     }
 
-    public Boolean checkUsedEmailError(){
+    public Boolean checkUsedEmailError() {
         return usedEmailError.isDisplayed();
     }
 
-    public String getConfirmPassError(){
+    public String getConfirmPassError() {
         return confirmPassError.getText();
     }
 
-    public Boolean checkConfirmPassError(){
+    public Boolean checkConfirmPassError() {
         return confirmPassError.isDisplayed();
     }
 
-    public String getPassError(){
+    public String getPassError() {
         return passError.getText();
     }
 
-    public Boolean checkPassError(){
+    public Boolean checkPassError() {
         return passError.isDisplayed();
     }
 
-    public String getLastNameErrorMessage(){
+    public String getLastNameErrorMessage() {
         return lastNameErrorMessage.getText();
     }
 
-    public Boolean checkLastNameErrorMessage(){
+    public Boolean checkLastNameErrorMessage() {
         return lastNameErrorMessage.isDisplayed();
     }
 
@@ -287,34 +280,33 @@ public class RegistrationPage extends BasePage {
         sendKey(email, RANDOM_EMAIL.getValue());
         sendKey(pass, RANDOM_PASS.getValue());
         sendKey(confirmPass, RANDOM_PASS.getValue());
-        Thread.sleep(1000);
     }
 
-    public String getLastNameText(){
+    public String getLastNameText() {
         return lastName.getAttribute("value");
     }
 
-    public String getFirstNameText(){
+    public String getFirstNameText() {
         return firstName.getAttribute("value");
     }
 
-    public String getEmailText(){
+    public String getEmailText() {
         return email.getAttribute("value");
     }
 
-    public String getPassText(){
+    public String getPassText() {
         return pass.getAttribute("value");
     }
 
-    public String getConfirmPssText(){
+    public String getConfirmPssText() {
         return confirmPass.getAttribute("value");
     }
 
-    public String getPassFieldType(){
+    public String getPassFieldType() {
         return pass.getAttribute("type");
     }
 
-    public String getConfirmPassFieldType(){
+    public String getConfirmPassFieldType() {
         return confirmPass.getAttribute("type");
     }
 }

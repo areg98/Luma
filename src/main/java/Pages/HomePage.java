@@ -48,7 +48,6 @@ public class HomePage {
     public boolean checkHomePantsPromo(){
         click(homePantsPromo);
         String currentUrl = driver.getCurrentUrl();
-        driver.navigate().back();
         if (currentUrl.equals("https://magento.softwaretestingboard.com/promotions/pants-all.html"))
             return true;
         else return false;
@@ -57,8 +56,6 @@ public class HomePage {
     public boolean checkHomeTeesPromo(){
         click(homeShirtsPromo);
         String currentUrl = driver.getCurrentUrl();
-        driver.navigate().back();
-        new HomePage(getDriver());
         if (currentUrl.equals("https://magento.softwaretestingboard.com/promotions/tees-all.html"))
             return true;
         else return false;

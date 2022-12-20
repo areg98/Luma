@@ -8,7 +8,7 @@ import static Enums.RegistrationPageEnum.*;
 import static utils.CustomWebDriver.getDriver;
 import static utils.CustomWebElement.*;
 
-//        Check if the user able to signup or register by entering the valid data in all the fields.
+//        Check if the user able to sign up or register by entering the valid data in all the fields.
 //        Check the registration form by entering the data only in some mandatory fields.
 //        Check the alert message for all the mandatory fields.
 //        Check the confirmation message when the user is successfully signup or register.
@@ -46,23 +46,19 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
-    public void checkPageTitle() {
+    public void checkLabels() { //Todo here
         softAssert.assertTrue(registrationPage.checkPageTitle());
         softAssert.assertEquals(registrationPage.getPageTitleText(), PAGE_TITLE.getValue());
-        softAssert.assertAll();
-    }
-
-    @Test
-    public void checkPersInfoText() {
         softAssert.assertTrue(registrationPage.checkPersInfoText());
         softAssert.assertEquals(registrationPage.getPersInfoText(), PERSONAL_INFO.getValue());
-        softAssert.assertAll();
-    }
-
-    @Test
-    public void checkSignInInfoText() {
         softAssert.assertTrue(registrationPage.checkSignInInfoText());
         softAssert.assertEquals(registrationPage.getSignInInfoText(), SIGN_IN_INFO.getValue());
+        softAssert.assertTrue(registrationPage.checkFirstNameText());
+        softAssert.assertTrue(registrationPage.checkLastNameText());
+        softAssert.assertTrue(registrationPage.checkEmailText());
+        softAssert.assertTrue(registrationPage.checkPassText());
+        softAssert.assertTrue(registrationPage.checkConfirmPassText());
+        softAssert.assertTrue(registrationPage.checkCreateButton());
         softAssert.assertAll();
     }
 
@@ -117,7 +113,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test(groups = {"labels"})
-    public void getText() throws InterruptedException {
+    public void getTexts() throws InterruptedException {
         registrationPage.fillAllFields();
         printError("First Name:           " + registrationPage.getFirstNameText());
         printError("Last Name:            " + registrationPage.getLastNameText());
@@ -133,16 +129,6 @@ public class RegistrationTest extends BaseTest {
 
     }
 
-    @Test(groups = {"labels"})
-    public void checkLabels() {
-        softAssert.assertTrue(registrationPage.checkFirstNameText());
-        softAssert.assertTrue(registrationPage.checkLastNameText());
-        softAssert.assertTrue(registrationPage.checkEmailText());
-        softAssert.assertTrue(registrationPage.checkPassText());
-        softAssert.assertTrue(registrationPage.checkConfirmPassText());
-        softAssert.assertTrue(registrationPage.checkCreateButton());
-        softAssert.assertAll();
-    }
 
     @Test
     public void checkPassType(){

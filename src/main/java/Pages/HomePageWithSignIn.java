@@ -15,7 +15,6 @@ public class HomePageWithSignIn {
     }
 
     public String getLoggedInText() throws InterruptedException {
-        Thread.sleep(2000);
         return loggedInText.getText();
     }
 }

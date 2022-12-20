@@ -43,14 +43,11 @@ public class SignInPage extends BasePage {
 
     }
 
-    public String validSignIn() throws InterruptedException {
-
+    public void validSignIn() throws InterruptedException {
         sendKey(userNameField, VALID_EMAIL.getValue());
         sendKey(passField, VALID_PASSWORD.getValue());
         click(submitButton);
-        Thread.sleep(2000);
         HomePageWithSignIn homePageWithSignIn = new HomePageWithSignIn(getDriver());
-        return homePageWithSignIn.getLoggedInText();
     }
 
     public String inValidSignIn() throws InterruptedException {
@@ -58,7 +55,6 @@ public class SignInPage extends BasePage {
         sendKey(userNameField, INVALID_EMAIL.getValue());
         sendKey(passField, INVALID_PASSWORD.getValue());
         click(submitButton);
-        Thread.sleep(1000);
         return incorrectSignInError.getText();
 
     }
@@ -68,7 +64,6 @@ public class SignInPage extends BasePage {
         sendKey(userNameField, "");
         sendKey(passField, VALID_PASSWORD.getValue());
         click(submitButton);
-        Thread.sleep(1000);
         return emailError.getText();
 
     }
@@ -78,7 +73,6 @@ public class SignInPage extends BasePage {
         sendKey(userNameField, VALID_EMAIL.getValue());
         sendKey(passField, "");
         click(submitButton);
-        Thread.sleep(1000);
         return passError.getText();
 
     }
