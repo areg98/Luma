@@ -1,0 +1,3 @@
+url=https://magento.softwaretestingboard.com/
+browser=chrome
+testng_xml=testng_xml

@@ -17,7 +17,8 @@ public enum SignInPageEnum {
     REG_CUSTOMER_TEXT("Registered Customers"),
     LOGIN_TEXT("If you have an account, sign in with your email address."),
     NEW_CUSTOMER_TEXT("New Customers"),
-    REG_TEXT("Creating an account has many benefits: check out faster, keep more than one address, track orders and more.");
+    REG_TEXT("Creating an account has many benefits: check out faster, keep more than one address, track orders and more."),
+    SIGN_URL("https://magento.softwaretestingboard.com/customer/account/login");
 
 
     private String value;

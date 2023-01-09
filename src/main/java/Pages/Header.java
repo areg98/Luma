@@ -73,8 +73,6 @@ public class Header {
     private WebElement sale;
 
 
-
-
     public Header(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -110,11 +108,9 @@ public class Header {
         click(womenTops);
     }
 
-    public void clickOnWomenTopsJackets() throws InterruptedException {
+    public void clickOnWomenTopsJackets() {
         hover(driver, women);
-        Thread.sleep(1000);
         hover(driver, womenTops);
-        Thread.sleep(1000);
         click(womenTopsJackets);
     }
 
@@ -153,85 +149,85 @@ public class Header {
         click(womenBottomsShorts);
     }
 
-    public void clickOnMen(){
+    public void clickOnMen() {
         click(men);
     }
 
-    public void clickOnMenTops(){
+    public void clickOnMenTops() {
         hover(driver, men);
         click(menTops);
     }
 
-    public void clickOnMenTopsJackets(){
+    public void clickOnMenTopsJackets() {
         hover(driver, men);
         hover(driver, menTops);
         click(menTopsJackets);
     }
 
-    public void clickOnMenTopsHoodiesSweatshirts(){
+    public void clickOnMenTopsHoodiesSweatshirts() {
         hover(driver, men);
         hover(driver, menTops);
         click(menTopsHoodiesSweatshirts);
     }
 
-    public void clickOnMenTopsTees(){
+    public void clickOnMenTopsTees() {
         hover(driver, men);
         hover(driver, menTops);
         click(menTopsTees);
     }
 
-    public void clickOnMenTopsTanks(){
+    public void clickOnMenTopsTanks() {
         hover(driver, men);
         hover(driver, menTops);
         click(menTopsTanks);
     }
 
-    public void clickOnMenBottoms(){
+    public void clickOnMenBottoms() {
         hover(driver, men);
         click(men);
     }
 
-    public void clickOnMenBottomsPants(){
+    public void clickOnMenBottomsPants() {
         hover(driver, men);
         hover(driver, menBottoms);
         click(menBottomsPants);
     }
 
-    public void clickOnMenBottomsShorts(){
+    public void clickOnMenBottomsShorts() {
         hover(driver, men);
         hover(driver, menBottoms);
         click(menBottomsShorts);
     }
 
-    public void clickOnGear(){
+    public void clickOnGear() {
         click(gear);
     }
 
-    public void clickOnGearBags(){
+    public void clickOnGearBags() {
         hover(driver, gear);
         click(gearBags);
     }
 
-    public void clickOnGearFitnessEquipment(){
+    public void clickOnGearFitnessEquipment() {
         hover(driver, gear);
         click(gearFitnessEquipment);
     }
 
-    public void clickOnGearWatches (){
+    public void clickOnGearWatches() {
         hover(driver, gear);
         click(gearWatches);
     }
 
-    public void clickOnTrainings(){
+    public void clickOnTrainings() {
         click(training);
     }
 
-    public void clickOnTrainingVideoDownload(){
+    public void clickOnTrainingVideoDownload() {
         hover(driver, training);
         click(trainingVideoDownload);
     }
 
-    public void clickOnSale(){
+    public void clickOnSale() {
         click(sale);
     }
 

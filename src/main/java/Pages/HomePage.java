@@ -3,11 +3,13 @@ package Pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.*;
+import utils.LoadableComponent;
 
 import static utils.CustomWebDriver.getDriver;
 import static utils.CustomWebElement.click;
+import static utils.WaitHelper.*;
 
-public class HomePage {
+public class HomePage extends BasePage {
     private static WebDriver driver;
     @FindBy(css = "[class='block-promo home-main']")
     private WebElement homeMainPromo;
@@ -25,18 +27,13 @@ public class HomePage {
     private WebElement signIn;
     private static String siteUrl = "https://magento.softwaretestingboard.com/";
 
-    public HomePage(WebDriver driver){
+
+    public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-     }
+    }
 
-
-//    public void clickOnSignInButton(){
-//        click(signIn);
-//    }
-
-
-    public  boolean checkHomeMainPromo(){
+    public boolean checkHomeMainPromo() {
         click(homeMainPromo);
         String currentUrl = driver.getCurrentUrl();
         driver.navigate().back();
@@ -45,7 +42,7 @@ public class HomePage {
         else return false;
     }
 
-    public boolean checkHomePantsPromo(){
+    public boolean checkHomePantsPromo() {
         click(homePantsPromo);
         String currentUrl = driver.getCurrentUrl();
         if (currentUrl.equals("https://magento.softwaretestingboard.com/promotions/pants-all.html"))
@@ -53,7 +50,7 @@ public class HomePage {
         else return false;
     }
 
-    public boolean checkHomeTeesPromo(){
+    public boolean checkHomeTeesPromo() {
         click(homeShirtsPromo);
         String currentUrl = driver.getCurrentUrl();
         if (currentUrl.equals("https://magento.softwaretestingboard.com/promotions/tees-all.html"))
@@ -61,7 +58,7 @@ public class HomePage {
         else return false;
     }
 
-    public boolean checkHomePerformancePromo(){
+    public boolean checkHomePerformancePromo() {
         click(homePerformancePromo);
         String currentUrl = driver.getCurrentUrl();
         driver.navigate().back();
@@ -70,7 +67,7 @@ public class HomePage {
         else return false;
     }
 
-    public boolean checkHomeEcoPromo(){
+    public boolean checkHomeEcoPromo() {
         click(homeEcoPromo);
         String currentUrl = driver.getCurrentUrl();
         driver.navigate().back();
@@ -80,13 +77,29 @@ public class HomePage {
         else return false;
     }
 
-    public boolean checkHomeErinPromo(){
+    public boolean checkHomeErinPromo() {
         click(homeErinPromo);
         String currentUrl = driver.getCurrentUrl();
         driver.navigate().back();
         if (currentUrl.equals("https://magento.softwaretestingboard.com/collections/erin-recommends.html"))
             return true;
         else return false;
+    }
+
+    @Override
+    protected void load() {
+        driver.get(siteUrl);
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+        super.isLoaded();
+        try {
+            waitUntilElementAppeared(homeShirtsPromo);
+        } catch (Exception e) {
+            throw new Error();
+        }
+
     }
 
 }

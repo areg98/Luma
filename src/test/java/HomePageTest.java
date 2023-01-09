@@ -9,8 +9,9 @@ public class HomePageTest extends BaseTest {
     HomePage homePage;
 
     @BeforeMethod
-    public void before(){
+    public void init(){
         homePage = new HomePage(getDriver());
+        homePage.open();
     }
 
     @Test

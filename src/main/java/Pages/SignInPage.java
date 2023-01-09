@@ -2,10 +2,13 @@ package Pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.*;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import static Enums.SignInPageEnum.*;
-import static utils.CustomWebDriver.*;
-import static utils.CustomWebElement.*;
+import static utils.CustomWebElement.click;
+import static utils.CustomWebElement.sendKey;
+import static utils.WaitHelper.waitUntilElementAppeared;
 
 public class SignInPage extends BasePage {
     private WebDriver driver;
@@ -37,21 +40,16 @@ public class SignInPage extends BasePage {
 
     public SignInPage(WebDriver driver) {
         this.driver = driver;
-        BasePage basePage = new BasePage();
-        basePage.getHeader().clickOnSignInButton();
         PageFactory.initElements(driver, this);
-
     }
 
-    public void validSignIn() throws InterruptedException {
+    public void validSignIn() {
         sendKey(userNameField, VALID_EMAIL.getValue());
         sendKey(passField, VALID_PASSWORD.getValue());
         click(submitButton);
-        HomePageWithSignIn homePageWithSignIn = new HomePageWithSignIn(getDriver());
     }
 
-    public String inValidSignIn() throws InterruptedException {
-        Thread.sleep(1000);
+    public String inValidSignIn(){
         sendKey(userNameField, INVALID_EMAIL.getValue());
         sendKey(passField, INVALID_PASSWORD.getValue());
         click(submitButton);
@@ -59,8 +57,7 @@ public class SignInPage extends BasePage {
 
     }
 
-    public String emptyEmailSignIn() throws InterruptedException {
-        Thread.sleep(1000);
+    public String emptyEmailSignIn(){
         sendKey(userNameField, "");
         sendKey(passField, VALID_PASSWORD.getValue());
         click(submitButton);
@@ -68,8 +65,7 @@ public class SignInPage extends BasePage {
 
     }
 
-    public String emptyPassSignIn() throws InterruptedException {
-        Thread.sleep(1000);
+    public String emptyPassSignIn(){
         sendKey(userNameField, VALID_EMAIL.getValue());
         sendKey(passField, "");
         click(submitButton);
@@ -77,8 +73,7 @@ public class SignInPage extends BasePage {
 
     }
 
-    public String getBaseText() throws InterruptedException {
-        Thread.sleep(2000);
+    public String getBaseText(){
         return baseText.getText();
     }
 
@@ -97,6 +92,23 @@ public class SignInPage extends BasePage {
     public void clickOnCreateAnAccountButton() {
         click(createAnAccountButton);
     }
+
+    @Override
+    protected void load() {
+        driver.navigate().to(SIGN_URL.getValue());
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+        super.isLoaded();
+        try{
+            waitUntilElementAppeared(submitButton);
+        }catch (Exception e){
+            throw new Error();
+        }
+
+    }
+
 
 
 }

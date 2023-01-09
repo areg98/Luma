@@ -2,11 +2,14 @@ package Pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.*;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import static utils.CustomWebElement.getText;
 
 public class HomePageWithSignIn {
     private WebDriver driver;
-    @FindBy(css = "[class='logged-in']")
+    @FindBy(className = "logged-in")
     private WebElement loggedInText;
 
     public HomePageWithSignIn(WebDriver driver){
@@ -14,7 +17,7 @@ public class HomePageWithSignIn {
         PageFactory.initElements(driver, this);
     }
 
-    public String getLoggedInText() throws InterruptedException {
-        return loggedInText.getText();
+    public String getLoggedInText(){
+        return getText(loggedInText);
     }
 }

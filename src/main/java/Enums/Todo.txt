@@ -1,0 +1,5 @@
+Todo what is log4j ?
+Todo https://seleniumjava.com/2017/01/06/how-to-create-custom-expected-conditions-in-selenium/
+Todo add custom wait helper
+Todo open in loadable component
+Todo check all loadable component

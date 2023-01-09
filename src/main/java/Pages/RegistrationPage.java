@@ -5,14 +5,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.*;
 
+import java.time.Duration;
 import java.util.List;
 
 import static Enums.RegistrationPageEnum.*;
 import static Enums.RegistrationPageEnum.INVALID_EMAIL;
 import static Enums.SignInPageEnum.*;
 import static utils.CustomWebElement.*;
+import static utils.WaitHelper.*;
 
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegistrationPage extends BasePage {
     private WebDriver driver;
@@ -65,7 +69,6 @@ public class RegistrationPage extends BasePage {
 
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
-        getHeader().clickOnRegButton();
         PageFactory.initElements(driver, this);
     }
 
@@ -73,18 +76,18 @@ public class RegistrationPage extends BasePage {
         return driver.getCurrentUrl();
     }
 
-    public String createAnAccount() throws InterruptedException {
+    public String createAnAccount()  {
         sendKey(firstName, FIRST_NAME.getValue());
         sendKey(lastName, LAST_NAME.getValue());
         sendKey(email, RANDOM_EMAIL.getValue());
         sendKey(pass, RANDOM_PASS.getValue());
         sendKey(confirmPass, RANDOM_PASS.getValue());
         click(createAnAccountButton);
-        return successMessage.getText();
+        return getText(successMessage);
 
     }
 
-    public void invalidEmailReg() throws InterruptedException {
+    public void invalidEmailReg()  {
         sendKey(firstName, FIRST_NAME.getValue());
         sendKey(lastName, LAST_NAME.getValue());
         sendKey(email, INVALID_EMAIL.getValue());
@@ -93,7 +96,7 @@ public class RegistrationPage extends BasePage {
         click(createAnAccountButton);
     }
 
-    public void regWithOutFirstName() throws InterruptedException {
+    public void regWithOutFirstName()  {
         sendKey(lastName, LAST_NAME.getValue());
         sendKey(email, RANDOM_EMAIL.getValue());
         sendKey(pass, RANDOM_PASS.getValue());
@@ -101,7 +104,7 @@ public class RegistrationPage extends BasePage {
         click(createAnAccountButton);
     }
 
-    public void regWithOutLastName() throws InterruptedException {
+    public void regWithOutLastName()  {
         sendKey(firstName, FIRST_NAME.getValue());
         sendKey(email, RANDOM_EMAIL.getValue());
         sendKey(pass, RANDOM_PASS.getValue());
@@ -109,7 +112,7 @@ public class RegistrationPage extends BasePage {
         click(createAnAccountButton);
     }
 
-    public void regWithOutEmail() throws InterruptedException {
+    public void regWithOutEmail()  {
         sendKey(firstName, FIRST_NAME.getValue());
         sendKey(lastName, LAST_NAME.getValue());
         sendKey(pass, RANDOM_PASS.getValue());
@@ -117,7 +120,7 @@ public class RegistrationPage extends BasePage {
         click(createAnAccountButton);
     }
 
-    public void regWithOutPass() throws InterruptedException {
+    public void regWithOutPass(){
         sendKey(firstName, FIRST_NAME.getValue());
         sendKey(lastName, LAST_NAME.getValue());
         sendKey(email, RANDOM_EMAIL.getValue());
@@ -125,7 +128,7 @@ public class RegistrationPage extends BasePage {
         click(createAnAccountButton);
     }
 
-    public void regWithOutConfirmPass() throws InterruptedException {
+    public void regWithOutConfirmPass(){
         sendKey(firstName, FIRST_NAME.getValue());
         sendKey(lastName, LAST_NAME.getValue());
         sendKey(email, RANDOM_EMAIL.getValue());
@@ -133,7 +136,7 @@ public class RegistrationPage extends BasePage {
         click(createAnAccountButton);
     }
 
-    public void regWithDifferentPass() throws InterruptedException {
+    public void regWithDifferentPass(){
         sendKey(firstName, FIRST_NAME.getValue());
         sendKey(lastName, LAST_NAME.getValue());
         sendKey(email, RANDOM_EMAIL.getValue());
@@ -142,7 +145,7 @@ public class RegistrationPage extends BasePage {
         click(createAnAccountButton);
     }
 
-    public void regWithUsedEmail() throws InterruptedException {
+    public void regWithUsedEmail(){
         sendKey(firstName, FIRST_NAME.getValue());
         sendKey(lastName, LAST_NAME.getValue());
         sendKey(email, VALID_EMAIL.getValue());
@@ -152,24 +155,61 @@ public class RegistrationPage extends BasePage {
     }
 
     public void checkWeakPassStrength() {
+//        click(pass);
         sendKey(pass, INVALID_PASSWORD.getValue());
+        sendKey(confirmPass,"iokjbjhkl");
     }
 
     public void checkMediumPassStrength() {
-        sendKey(pass, "123aaAQ!");
+        click(pass);
+        sendKey(pass, "123aaAQ@");
     }
 
     public void checkStrongPassStrength() {
+        click(pass);
         sendKey(pass, VALID_PASSWORD.getValue());
     }
 
     public void checkVeryStrongPassStrength() {
+        click(pass);
         sendKey(pass, VALID_PASSWORD.getValue() + "aa");
     }
 
 
-    public String getPassStrengthColor() throws InterruptedException {
-        Thread.sleep(2000);
+    public String getPassStrengthColor() {
+        waitUntilElementAppeared(passStrengthColor);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        wait.until( new ExpectedCondition<Boolean>() {
+//            public Boolean apply(WebDriver driver) {
+//                try {
+//                    printError("waiting...");
+//                    String script = "return window.getComputedStyle(document.querySelector('.password-strength-meter'),'::before').getPropertyValue('background-color')";
+//                    JavascriptExecutor js = (JavascriptExecutor) driver;
+//                    String backgroundColor = js.executeScript(script).toString();
+//                    return backgroundColor.isEmpty();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    printError("not found");
+//                    return false;
+//                }
+//            }
+//        });
+//        wait.until( new ExpectedCondition<Boolean>() {
+//            public Boolean apply(WebDriver driver) {
+//                try {
+//                    printError("waiting...");
+//                    String script = "return window.getComputedStyle(document.querySelector('.password-strength-meter'),'::before')";
+//                    JavascriptExecutor js = (JavascriptExecutor) driver;
+//                    WebElement element = (WebElement) js.executeScript(script);
+//                    printError(element.toString());
+//                    return backgroundColor.isEmpty();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    printError("not found");
+//                    return false;
+//                }
+//            }
+//        });
         String script = "return window.getComputedStyle(document.querySelector('.password-strength-meter'),'::before').getPropertyValue('background-color')";
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String color = js.executeScript(script).toString();
@@ -179,15 +219,12 @@ public class RegistrationPage extends BasePage {
 
 
     public String getUsedEmailErrorText() {
-        return usedEmailError.getText();
-    }
-
-    public Boolean checkUsedEmailError() {
-        return usedEmailError.isDisplayed();
+        printError(usedEmailError.toString());
+        return getText(usedEmailError);
     }
 
     public String getConfirmPassError() {
-        return confirmPassError.getText();
+        return getText(confirmPassError);
     }
 
     public Boolean checkConfirmPassError() {
@@ -195,7 +232,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public String getPassError() {
-        return passError.getText();
+        return getText(passError);
     }
 
     public Boolean checkPassError() {
@@ -203,7 +240,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public String getLastNameErrorMessage() {
-        return lastNameErrorMessage.getText();
+        return getText(lastNameErrorMessage);
     }
 
     public Boolean checkLastNameErrorMessage() {
@@ -211,7 +248,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public String getEmailErrorMessage() {
-        return emailErrorMessage.getText();
+        return getText(emailErrorMessage);
     }
 
     public Boolean checkEmailErrorMessage() {
@@ -219,7 +256,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public String getFirstNameErrorMessage() {
-        return firstNameErrorMessage.getText();
+        return getText(firstNameErrorMessage);
     }
 
     public Boolean checkFirstNameErrorMessage() {
@@ -231,7 +268,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public String getPageTitleText() {
-        return pageTitle.getText();
+        return getText(pageTitle);
     }
 
     public Boolean checkPersInfoText() {
@@ -239,7 +276,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public String getPersInfoText() {
-        return infoTexts.get(0).getText();
+        return getText(infoTexts.get(0));
     }
 
     public Boolean checkSignInInfoText() {
@@ -274,14 +311,13 @@ public class RegistrationPage extends BasePage {
         return createAnAccountButton.isDisplayed();
     }
 
-    public void fillAllFields() throws InterruptedException {
+    public void fillAllFields(){
         sendKey(firstName, FIRST_NAME.getValue());
         sendKey(lastName, LAST_NAME.getValue());
         sendKey(email, RANDOM_EMAIL.getValue());
         sendKey(pass, RANDOM_PASS.getValue());
         sendKey(confirmPass, RANDOM_PASS.getValue());
     }
-
     public String getLastNameText() {
         return lastName.getAttribute("value");
     }
@@ -308,5 +344,23 @@ public class RegistrationPage extends BasePage {
 
     public String getConfirmPassFieldType() {
         return confirmPass.getAttribute("type");
+    }
+
+
+    @Override
+    protected void load() {
+        driver.navigate().to(REGISTRATION_PAGE_URl.getValue());
+    }
+
+
+    @Override
+    protected void isLoaded() throws Error {
+        super.isLoaded();
+        try{
+            waitUntilElementAppeared(firstName);
+        }catch (Exception e){
+            throw new Error();
+        }
+
     }
 }

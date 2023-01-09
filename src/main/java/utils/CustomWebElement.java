@@ -10,22 +10,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 import static utils.CustomWebDriver.getDriver;
+import static utils.WaitHelper.*;
 
 public class CustomWebElement {
-    static WebDriver driver = getDriver();
+    private static final int TIME_OUT = 10;
+    static WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_OUT));;
 
-    public static void click(WebElement element){
-        try {
-            new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(element));
-            element.click();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
+    public static void click(WebElement element){  // Todo check
+        waitUntilElementToBeClickable(element);
+        element.click();
     }
 
     public static void sendKey(WebElement element, String text){
         try {
-            new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(element));
+            waitUntilElementAppeared(element);
             element.clear();
             element.sendKeys(text);
         }catch (Exception e){
@@ -34,7 +33,7 @@ public class CustomWebElement {
     }
 
     public static void hover(WebDriver driver, WebElement element){
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(element));
+        waitUntilElementAppeared(element);
         Actions builder = new Actions(driver);
         Action mouseOverHome = builder
                 .moveToElement(element)
@@ -43,8 +42,13 @@ public class CustomWebElement {
     }
 
     public static String getText(WebElement element){
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(element));
+        waitUntilTextAppeared(element);
         return element.getText();
+    }
+
+
+    public static void refreshDriver(WebDriver driver){
+        driver.navigate().refresh();
     }
 
     public static void printError(String str){

@@ -1,12 +1,14 @@
 import Pages.RegistrationPage;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import utils.CustomWebElement;
 
 import static Enums.RegistrationPageEnum.*;
 import static utils.CustomWebDriver.getDriver;
-import static utils.CustomWebElement.*;
+import static utils.CustomWebElement.printError;
+import static utils.CustomWebElement.refreshDriver;
 
 //        Check if the user able to sign up or register by entering the valid data in all the fields.
 //        Check the registration form by entering the data only in some mandatory fields.
@@ -21,18 +23,18 @@ import static utils.CustomWebElement.*;
 public class RegistrationTest extends BaseTest {
 
     RegistrationPage registrationPage;
-    WebDriver driver = getDriver();
     SoftAssert softAssert = new SoftAssert();
 
     @BeforeMethod
-    public void beforeMethods() {
+    public void init() {
         registrationPage = new RegistrationPage(getDriver());
+        registrationPage.open();
     }
 
-    @BeforeGroups({"password", "labels"})
-    public void beforeGroup() {
-        registrationPage = new RegistrationPage(getDriver());
-    }
+//    @BeforeGroups({"password", "labels"})
+//    public void beforeGroup() {
+//        registrationPage = new RegistrationPage(getDriver());
+//    }
 
     @Test
     public void openRegPage() {
@@ -41,12 +43,12 @@ public class RegistrationTest extends BaseTest {
 
 
     @Test
-    public void createAnAccountPositive() throws InterruptedException {
+    public void createAnAccountPositive() {
         Assert.assertEquals(registrationPage.createAnAccount(), "Thank you for registering with Fake Online Clothing Store.");
     }
 
     @Test
-    public void checkLabels() { //Todo here
+    public void checkLabels() {
         softAssert.assertTrue(registrationPage.checkPageTitle());
         softAssert.assertEquals(registrationPage.getPageTitleText(), PAGE_TITLE.getValue());
         softAssert.assertTrue(registrationPage.checkPersInfoText());
@@ -63,7 +65,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
-    public void checkEmailValidation() throws InterruptedException {
+    public void checkEmailValidation() {
         registrationPage.invalidEmailReg();
         softAssert.assertTrue(registrationPage.checkEmailErrorMessage());
         softAssert.assertEquals(registrationPage.getEmailErrorMessage(), INVALID_EMAIL_ERROR.getValue());
@@ -71,7 +73,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
-    public void checkRegWithOutFirstName() throws InterruptedException {
+    public void checkRegWithOutFirstName() {
         registrationPage.regWithOutFirstName();
         softAssert.assertTrue(registrationPage.checkFirstNameErrorMessage());
         softAssert.assertEquals(registrationPage.getFirstNameErrorMessage(), EMPTY_FIELD_ERROR.getValue());
@@ -79,7 +81,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
-    public void checkRegWithOutLastName() throws InterruptedException {
+    public void checkRegWithOutLastName() {
         registrationPage.regWithOutLastName();
         softAssert.assertTrue(registrationPage.checkLastNameErrorMessage());
         softAssert.assertEquals(registrationPage.getLastNameErrorMessage(), EMPTY_FIELD_ERROR.getValue());
@@ -87,7 +89,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
-    public void checkRegWithOutEmail() throws InterruptedException {
+    public void checkRegWithOutEmail() {
         registrationPage.regWithOutEmail();
         softAssert.assertTrue(registrationPage.checkEmailErrorMessage());
         softAssert.assertEquals(registrationPage.getEmailErrorMessage(), EMPTY_FIELD_ERROR.getValue());
@@ -96,7 +98,7 @@ public class RegistrationTest extends BaseTest {
 
 
     @Test
-    public void checkRegWithPass() throws InterruptedException {
+    public void checkRegWithPass() {
         registrationPage.regWithOutPass();
         softAssert.assertTrue(registrationPage.checkPassError());
         softAssert.assertEquals(registrationPage.getPassError(), EMPTY_FIELD_ERROR.getValue());
@@ -105,7 +107,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
-    public void checkRegWithConfirmPass() throws InterruptedException {
+    public void checkRegWithConfirmPass() {
         registrationPage.regWithOutConfirmPass();
         softAssert.assertTrue(registrationPage.checkConfirmPassError());
         softAssert.assertEquals(registrationPage.getConfirmPassError(), EMPTY_FIELD_ERROR.getValue());
@@ -113,14 +115,15 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test(groups = {"labels"})
-    public void getTexts() throws InterruptedException {
+    public void getTexts() {
+        CustomWebElement customWebElement = new CustomWebElement();
         registrationPage.fillAllFields();
         printError("First Name:           " + registrationPage.getFirstNameText());
         printError("Last Name:            " + registrationPage.getLastNameText());
         printError("E-mail:               " + registrationPage.getEmailText());
         printError("Password:             " + registrationPage.getPassText());
         printError("Confirm Password:     " + registrationPage.getConfirmPssText());
-        driver.navigate().refresh();
+        refreshDriver(getDriver());
         softAssert.assertEquals(registrationPage.getFirstNameText(), "");
         softAssert.assertEquals(registrationPage.getLastNameText(), "");
         softAssert.assertEquals(registrationPage.getEmailText(), "");
@@ -131,47 +134,45 @@ public class RegistrationTest extends BaseTest {
 
 
     @Test
-    public void checkPassType(){
+    public void checkPassType() {
         softAssert.assertEquals(registrationPage.getPassFieldType(), "password");
         softAssert.assertEquals(registrationPage.getConfirmPassFieldType(), "password");
         softAssert.assertAll();
     }
 
     @Test
-    public void checkConfirmPass() throws InterruptedException {
+    public void checkConfirmPass() {
         registrationPage.regWithDifferentPass();
         Assert.assertEquals(registrationPage.getConfirmPassError(), CONFIRM_PASS_ERROR.getValue());
     }
 
     @Test
-    public void checkRegWithUsedEmail() throws InterruptedException {
+    public void checkRegWithUsedEmail() {
         registrationPage.regWithUsedEmail();
-        Thread.sleep(1000);
-        softAssert.assertTrue(registrationPage.checkUsedEmailError());
-        softAssert.assertEquals(registrationPage.getUsedEmailErrorText(), USED_EMAIL_ERROR.getValue());
-        softAssert.assertAll();
+        Assert.assertEquals(registrationPage.getUsedEmailErrorText(), USED_EMAIL_ERROR.getValue());
     }
 
     @Test(groups = {"password"})
     public void checkWeakPassStrength() throws InterruptedException {
         registrationPage.checkWeakPassStrength();
+        Thread.sleep(3000);
         Assert.assertEquals(registrationPage.getPassStrengthColor(), WEAK_PASS_COLOR.getValue());
     }
 
     @Test(groups = {"password"})
-    public void checkMediumPassStrength() throws InterruptedException {
+    public void checkMediumPassStrength() {
         registrationPage.checkMediumPassStrength();
         Assert.assertEquals(registrationPage.getPassStrengthColor(), MEDIUM_PASS_COLOR.getValue());
     }
 
     @Test(groups = {"password"})
-    public void checkStrongPassStrength() throws InterruptedException {
+    public void checkStrongPassStrength() {
         registrationPage.checkStrongPassStrength();
         Assert.assertEquals(registrationPage.getPassStrengthColor(), STRONG_PASS_COLOR.getValue());
     }
 
     @Test(groups = {"password"})
-    public void checkVeryStrongPassStrength() throws InterruptedException {
+    public void checkVeryStrongPassStrength() {
         registrationPage.checkVeryStrongPassStrength();
         Assert.assertEquals(registrationPage.getPassStrengthColor(), VERY_STRONG_PASS_COLOR.getValue());
     }
