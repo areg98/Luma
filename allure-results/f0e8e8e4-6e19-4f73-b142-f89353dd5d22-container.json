@@ -1,0 +1,1 @@
+{"uuid":"f0e8e8e4-6e19-4f73-b142-f89353dd5d22","name":"RegistrationTest.init","children":["83b65849-c9b4-4167-a26a-89cf49945919"],"description":"","befores":[{"name":"init","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1676288859671,"stop":1676288863442}],"afters":[],"links":[],"start":1676288859671,"stop":1676288863442}

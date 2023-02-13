@@ -1,0 +1,120 @@
+2023-02-13 15:53:58 INFO  MyListener:9 - [32m Starting checkConfirmPass[0m
+2023-02-13 15:54:01 INFO  MyListener:9 - [32m Test is Passed checkConfirmPass
+[0m
+2023-02-13 15:54:02 INFO  MyListener:9 - [32m Starting checkEditBtns[0m
+2023-02-13 15:54:08 INFO  MyListener:9 - [32m Starting checkEmailValidation[0m
+2023-02-13 15:54:10 INFO  MyListener:9 - [32m Test is Passed checkEmailValidation
+[0m
+2023-02-13 15:54:16 INFO  MyListener:9 - [32m Starting checkLabels[0m
+2023-02-13 15:54:17 INFO  MyListener:9 - [32m Test is Passed checkLabels
+[0m
+2023-02-13 15:54:22 INFO  MyListener:9 - [32m Starting checkPassStrengths[0m
+2023-02-13 15:54:24 INFO  MyListener:9 - [32m Test is Passed checkEditBtns
+[0m
+2023-02-13 15:54:24 INFO  MyListener:9 - [32m Test is Passed checkPassStrengths
+[0m
+2023-02-13 15:54:29 INFO  MyListener:9 - [32m Starting checkPassType[0m
+2023-02-13 15:54:29 INFO  MyListener:9 - [32m Test is Passed checkPassType
+[0m
+2023-02-13 15:54:34 INFO  MyListener:9 - [32m Starting checkLabels[0m
+2023-02-13 15:54:34 INFO  MyListener:9 - [32m Test is Passed checkLabels
+[0m
+2023-02-13 15:54:34 INFO  MyListener:9 - [32m Starting checkRegWithConfirmPass[0m
+2023-02-13 15:54:37 INFO  MyListener:9 - [32m Test is Passed checkRegWithConfirmPass
+[0m
+2023-02-13 15:54:42 INFO  MyListener:9 - [32m Starting checkRegWithOutEmail[0m
+2023-02-13 15:54:43 INFO  MyListener:9 - [32m Test is Passed checkRegWithOutEmail
+[0m
+2023-02-13 15:54:45 INFO  MyListener:9 - [32m Starting openAccountInformation[0m
+2023-02-13 15:54:47 INFO  MyListener:9 - [32m Test is Passed openAccountInformation
+[0m
+2023-02-13 15:54:49 INFO  MyListener:9 - [32m Starting checkRegWithOutFirstName[0m
+2023-02-13 15:54:50 INFO  MyListener:9 - [32m Test is Passed checkRegWithOutFirstName
+[0m
+2023-02-13 15:54:56 INFO  MyListener:9 - [32m Starting checkRegWithOutLastName[0m
+2023-02-13 15:54:57 INFO  MyListener:9 - [32m Starting openAddressBook[0m
+2023-02-13 15:54:58 INFO  MyListener:9 - [32m Test is Passed checkRegWithOutLastName
+[0m
+2023-02-13 15:54:59 INFO  MyListener:9 - [32m Test is Passed openAddressBook
+[0m
+2023-02-13 15:55:03 INFO  MyListener:9 - [32m Starting checkRegWithPass[0m
+2023-02-13 15:55:05 INFO  MyListener:9 - [32m Test is Passed checkRegWithPass
+[0m
+2023-02-13 15:55:12 INFO  MyListener:9 - [32m Starting openMyDownloadableProducts[0m
+2023-02-13 15:55:14 INFO  MyListener:9 - [32m Starting checkRegWithUsedEmail[0m
+2023-02-13 15:55:15 INFO  MyListener:9 - [32m Test is Passed openMyDownloadableProducts
+[0m
+2023-02-13 15:55:20 INFO  MyListener:9 - [32m Test is Passed checkRegWithUsedEmail
+[0m
+2023-02-13 15:55:25 INFO  MyListener:9 - [32m Starting createAnAccountPositive[0m
+2023-02-13 15:55:26 INFO  MyListener:9 - [32m Starting openMyOrders[0m
+2023-02-13 15:55:27 INFO  MyListener:9 - [32m Test is Passed openMyOrders
+[0m
+2023-02-13 15:55:30 INFO  MyListener:9 - [32m Test is Passed createAnAccountPositive
+[0m
+2023-02-13 15:55:36 INFO  MyListener:9 - [32m Starting getTexts[0m
+2023-02-13 15:55:37 INFO  MyListener:9 - [32m Starting openMyProductReviews[0m
+2023-02-13 15:55:39 INFO  MyListener:9 - [32m Test is Passed openMyProductReviews
+[0m
+2023-02-13 15:55:40 INFO  MyListener:9 - [32m Test is Passed getTexts
+[0m
+2023-02-13 15:55:45 INFO  MyListener:9 - [32m Starting openRegPage[0m
+2023-02-13 15:55:45 INFO  MyListener:9 - [32m Test is Passed openRegPage
+[0m
+2023-02-13 15:55:50 INFO  MyListener:9 - [32m Starting openMyWishList[0m
+2023-02-13 15:55:50 INFO  MyListener:9 - [32m Starting checkBaseText[0m
+2023-02-13 15:55:51 INFO  MyListener:9 - [32m Test is Passed checkBaseText
+[0m
+2023-02-13 15:55:52 INFO  MyListener:9 - [32m Test is Passed openMyWishList
+[0m
+2023-02-13 15:55:55 INFO  MyListener:9 - [32m Starting checkCreateAnAccountButton[0m
+2023-02-13 15:55:57 INFO  MyListener:9 - [32m Test is Passed checkCreateAnAccountButton
+[0m
+2023-02-13 15:56:01 INFO  MyListener:9 - [32m Starting checkLoginText[0m
+2023-02-13 15:56:02 INFO  MyListener:9 - [32m Starting openNewsletterSubscription[0m
+2023-02-13 15:56:02 INFO  MyListener:9 - [32m Test is Passed checkLoginText
+[0m
+2023-02-13 15:56:04 INFO  MyListener:9 - [32m Test is Passed openNewsletterSubscription
+[0m
+2023-02-13 15:56:06 INFO  MyListener:9 - [32m Starting checkNewCustomerText[0m
+2023-02-13 15:56:06 INFO  MyListener:9 - [32m Test is Passed checkNewCustomerText
+[0m
+2023-02-13 15:56:10 INFO  MyListener:9 - [32m Starting checkRegisteredUserText[0m
+2023-02-13 15:56:10 INFO  MyListener:9 - [32m Test is Passed checkRegisteredUserText
+[0m
+2023-02-13 15:56:14 INFO  MyListener:9 - [32m Starting emptyEmailLogin[0m
+2023-02-13 15:56:14 INFO  MyListener:9 - [32m Starting openStoredPaymentMethods[0m
+2023-02-13 15:56:15 INFO  MyListener:9 - [32m Test is Passed emptyEmailLogin
+[0m
+2023-02-13 15:56:16 INFO  MyListener:9 - [32m Test is Passed openStoredPaymentMethods
+[0m
+2023-02-13 15:56:19 INFO  MyListener:9 - [32m Starting emptyPassLogin[0m
+2023-02-13 15:56:20 INFO  MyListener:9 - [32m Starting checkEcoPromo[0m
+2023-02-13 15:56:20 INFO  MyListener:9 - [32m Test is Passed emptyPassLogin
+[0m
+2023-02-13 15:56:24 INFO  MyListener:9 - [32m Starting inValidLogin[0m
+2023-02-13 15:56:24 INFO  MyListener:9 - [32m Test is Passed checkEcoPromo
+[0m
+2023-02-13 15:56:27 INFO  MyListener:9 - [32m Starting checkErinPromo[0m
+2023-02-13 15:56:28 INFO  MyListener:9 - [32m Test is Passed inValidLogin
+[0m
+2023-02-13 15:56:31 INFO  MyListener:9 - [32m Test is Passed checkErinPromo
+[0m
+2023-02-13 15:56:31 INFO  MyListener:9 - [32m Starting validLogin[0m
+2023-02-13 15:56:33 INFO  MyListener:9 - [32m Starting checkMainPromo[0m
+2023-02-13 15:56:36 INFO  MyListener:9 - [32m Test is Passed validLogin
+[0m
+2023-02-13 15:56:36 INFO  MyListener:9 - [32m Test is Passed checkMainPromo
+[0m
+2023-02-13 15:56:39 INFO  MyListener:9 - [32m Starting checkPantsPromo[0m
+2023-02-13 15:56:40 INFO  MyListener:9 - [32m Test is Passed checkPantsPromo
+[0m
+2023-02-13 15:56:43 INFO  MyListener:9 - [32m Starting checkPerformancePromo[0m
+2023-02-13 15:56:45 INFO  MyListener:9 - [32m Test is Passed checkPerformancePromo
+[0m
+2023-02-13 15:56:47 INFO  MyListener:9 - [32m Starting checkTeesPromo[0m
+2023-02-13 15:56:48 INFO  MyListener:9 - [32m Test is Passed checkTeesPromo
+[0m
+2023-02-13 15:56:51 INFO  MyListener:9 - [32m Starting openHotSellerItem[0m
+2023-02-13 15:56:52 INFO  MyListener:9 - [32m Test is Passed openHotSellerItem
+[0m

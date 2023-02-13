@@ -3,8 +3,8 @@ import Pages.SignInPage;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import static Enums.RegistrationPageEnum.REGISTRATION_PAGE_URl;
-import static Enums.SignInPageEnum.*;
+import static Constants.RegistrationPageEnum.REGISTRATION_PAGE_URl;
+import static Constants.SignInPageEnum.*;
 import static utils.CustomWebDriver.getDriver;
 
 public class SignInTest extends BaseTest {

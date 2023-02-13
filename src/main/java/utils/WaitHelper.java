@@ -1,6 +1,8 @@
 package utils;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -32,11 +34,12 @@ public class WaitHelper {
     }
 
     public static void waitUntilElementAppeared(WebElement element) {
-        wait.until(toBeAppeared(element));
+//        wait.until(toBeAppeared(element));
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-//    public static void waitUntilBeforeAppeared(WebElement element) {
-//        wait.until(beforeElement(element));
-//    }
+    public static void waitUntilColorToBeAppeared(WebElement element){
+        wait.until(toBeColorAppeared(element));
+    }
 
 }

@@ -2,8 +2,6 @@ package utils;
 
 import java.time.Duration;
 
-import static utils.CustomWebElement.printError;
-
 public abstract class LoadableComponent<T extends LoadableComponent<T>> {
     public LoadableComponent() {
     }
@@ -13,7 +11,6 @@ public abstract class LoadableComponent<T extends LoadableComponent<T>> {
             this.isLoaded();
             return (T) this;
         } catch (Error var2) {
-            printError("error");
             this.load();
             this.isLoaded();
             return (T) this;

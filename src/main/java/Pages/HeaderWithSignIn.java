@@ -7,8 +7,7 @@ public class HeaderWithSignIn {
     private WebDriver driver;
 
 
-
-    public HeaderWithSignIn(WebDriver driver){
+    public HeaderWithSignIn(WebDriver driver) {
         this.driver = driver;
     }
 

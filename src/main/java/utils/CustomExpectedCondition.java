@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
-import static utils.CustomWebElement.printError;
+import static utils.CustomWebDriver.getDriver;
 
 public class CustomExpectedCondition {
 
@@ -49,25 +49,22 @@ public class CustomExpectedCondition {
         };
     }
 
-//    public static ExpectedCondition<Boolean> beforeElement(WebElement element) {
-//        return new ExpectedCondition<Boolean>() {
-//            public Boolean apply(WebDriver driver) {
-//                try {
-//                    printError("waiting...");
-//                    String script = "return window.getComputedStyle(document.querySelector('." + element + "'),'::before').getPropertyValue('color')";
-//                    JavascriptExecutor js = (JavascriptExecutor) driver;
-//                    String name = js.executeScript(script).toString();
-//                    return name.isEmpty();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    printError("not found");
-//                    printError(element.toString());
-//                    return false;
-//                }
-//            }
-//        };
-//    }
-
+    public static ExpectedCondition<Boolean> toBeColorAppeared(WebElement element) {
+        return new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                try {
+                    String script = "return window.getComputedStyle(document.querySelector('.password-strength-meter'),'::before').getPropertyValue('background-color')";
+                    JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                    String backgroundColor = js.executeScript(script).toString();
+                    backgroundColor = Color.fromString(backgroundColor).asHex();
+                    return !backgroundColor.equals("#000000");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+        };
+    }
 
 
 }

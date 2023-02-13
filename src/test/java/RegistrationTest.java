@@ -3,12 +3,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import utils.CustomWebElement;
 
-import static Enums.RegistrationPageEnum.*;
+import static Constants.RegistrationPageEnum.*;
 import static utils.CustomWebDriver.getDriver;
-import static utils.CustomWebElement.printError;
-import static utils.CustomWebElement.refreshDriver;
+import static utils.CustomWebElement.printInfo;
 
 //        Check if the user able to sign up or register by entering the valid data in all the fields.
 //        Check the registration form by entering the data only in some mandatory fields.
@@ -19,7 +17,6 @@ import static utils.CustomWebElement.refreshDriver;
 //        Check whether the password field values are displayed in an encrypted format or not.
 //        Check whether the validation is added for passwords and confirm whether passwords are the same or not.
 //        Check by entering an already registered email address, Check if the error message is displaying or not.
-
 public class RegistrationTest extends BaseTest {
 
     RegistrationPage registrationPage;
@@ -29,12 +26,9 @@ public class RegistrationTest extends BaseTest {
     public void init() {
         registrationPage = new RegistrationPage(getDriver());
         registrationPage.open();
+        getDriver().navigate().refresh();
     }
 
-//    @BeforeGroups({"password", "labels"})
-//    public void beforeGroup() {
-//        registrationPage = new RegistrationPage(getDriver());
-//    }
 
     @Test
     public void openRegPage() {
@@ -114,16 +108,15 @@ public class RegistrationTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(groups = {"labels"})
+    @Test
     public void getTexts() {
-        CustomWebElement customWebElement = new CustomWebElement();
         registrationPage.fillAllFields();
-        printError("First Name:           " + registrationPage.getFirstNameText());
-        printError("Last Name:            " + registrationPage.getLastNameText());
-        printError("E-mail:               " + registrationPage.getEmailText());
-        printError("Password:             " + registrationPage.getPassText());
-        printError("Confirm Password:     " + registrationPage.getConfirmPssText());
-        refreshDriver(getDriver());
+        printInfo("First Name:           " + registrationPage.getFirstNameText());
+        printInfo("Last Name:            " + registrationPage.getLastNameText());
+        printInfo("E-mail:               " + registrationPage.getEmailText());
+        printInfo("Password:             " + registrationPage.getPassText());
+        printInfo("Confirm Password:     " + registrationPage.getConfirmPssText());
+        getDriver().navigate().refresh();
         softAssert.assertEquals(registrationPage.getFirstNameText(), "");
         softAssert.assertEquals(registrationPage.getLastNameText(), "");
         softAssert.assertEquals(registrationPage.getEmailText(), "");
@@ -152,29 +145,19 @@ public class RegistrationTest extends BaseTest {
         Assert.assertEquals(registrationPage.getUsedEmailErrorText(), USED_EMAIL_ERROR.getValue());
     }
 
-    @Test(groups = {"password"})
-    public void checkWeakPassStrength() throws InterruptedException {
+    @Test
+    public void checkPassStrengths() {
+        SoftAssert softAssert = new SoftAssert();
         registrationPage.checkWeakPassStrength();
-        Thread.sleep(3000);
-        Assert.assertEquals(registrationPage.getPassStrengthColor(), WEAK_PASS_COLOR.getValue());
-    }
-
-    @Test(groups = {"password"})
-    public void checkMediumPassStrength() {
+        softAssert.assertEquals(registrationPage.getPassStrengthColor(), WEAK_PASS_COLOR.getValue());
         registrationPage.checkMediumPassStrength();
-        Assert.assertEquals(registrationPage.getPassStrengthColor(), MEDIUM_PASS_COLOR.getValue());
-    }
-
-    @Test(groups = {"password"})
-    public void checkStrongPassStrength() {
+        softAssert.assertEquals(registrationPage.getPassStrengthColor(), MEDIUM_PASS_COLOR.getValue());
         registrationPage.checkStrongPassStrength();
-        Assert.assertEquals(registrationPage.getPassStrengthColor(), STRONG_PASS_COLOR.getValue());
+        softAssert.assertEquals(registrationPage.getPassStrengthColor(), STRONG_PASS_COLOR.getValue());
+        registrationPage.checkVeryStrongPassStrength();
+        softAssert.assertEquals(registrationPage.getPassStrengthColor(), VERY_STRONG_PASS_COLOR.getValue());
+        softAssert.assertAll();
     }
 
-    @Test(groups = {"password"})
-    public void checkVeryStrongPassStrength() {
-        registrationPage.checkVeryStrongPassStrength();
-        Assert.assertEquals(registrationPage.getPassStrengthColor(), VERY_STRONG_PASS_COLOR.getValue());
-    }
 
 }

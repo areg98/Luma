@@ -43,4 +43,9 @@ public class HomePageTest extends BaseTest {
     public void checkEcoPromo(){
         Assert.assertTrue(homePage.checkHomeEcoPromo());
     }
+
+    @Test(invocationCount = 1)
+    public void openHotSellerItem() {
+        Assert.assertEquals(homePage.clickOnHotSellerItem(), homePage.getItemTitleText());
+    }
 }

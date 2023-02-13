@@ -46,12 +46,12 @@ public class CustomWebElement {
         return element.getText();
     }
 
-
-    public static void refreshDriver(WebDriver driver){
-        driver.navigate().refresh();
+    public static void printInfo(Object text) {
+        System.out.println("\u001B[32m" + text + "\u001B[0m");
     }
 
-    public static void printError(String str){
-        System.out.println("\u001B[31m" + str +  "\u001B[0m");
+    public static String printError(String text) {
+        throw new Error("\u001B[31m" + text + "\u001B[0m");
     }
+
 }

@@ -1,0 +1,1 @@
+{"uuid":"19963f39-a602-4603-88af-6e46911fe953","name":"SignInTest.init","children":["988920a6-6851-4b12-9261-ddd3be972f5b"],"description":"","befores":[{"name":"init","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1676120657216,"stop":1676120659859}],"afters":[],"links":[],"start":1676120657216,"stop":1676120659859}

@@ -3,20 +3,18 @@ package Pages;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.*;
+import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-import java.time.Duration;
 import java.util.List;
 
-import static Enums.RegistrationPageEnum.*;
-import static Enums.RegistrationPageEnum.INVALID_EMAIL;
-import static Enums.SignInPageEnum.*;
+import static Constants.RegistrationPageEnum.INVALID_EMAIL;
+import static Constants.RegistrationPageEnum.*;
+import static Constants.SignInPageEnum.*;
 import static utils.CustomWebElement.*;
-import static utils.WaitHelper.*;
-
-import org.openqa.selenium.support.Color;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import static utils.WaitHelper.waitUntilColorToBeAppeared;
+import static utils.WaitHelper.waitUntilElementAppeared;
 
 public class RegistrationPage extends BasePage {
     private WebDriver driver;
@@ -64,6 +62,8 @@ public class RegistrationPage extends BasePage {
     private WebElement usedEmailError;
     @FindBy(css = ".password-strength-meter")
     private WebElement passStrengthColor;
+    @FindBy(id = "is_subscribed")
+    private WebElement radioButtonNewsletter;
 
     // Todo Add List for input fields and labels
 
@@ -155,61 +155,28 @@ public class RegistrationPage extends BasePage {
     }
 
     public void checkWeakPassStrength() {
-//        click(pass);
-        sendKey(pass, INVALID_PASSWORD.getValue());
-        sendKey(confirmPass,"iokjbjhkl");
+        sendKey(pass, WEEK_PASS.getValue());
+        click(radioButtonNewsletter);
     }
 
     public void checkMediumPassStrength() {
-        click(pass);
-        sendKey(pass, "123aaAQ@");
+        sendKey(pass, MEDIUM_PASS.getValue());
+        click(radioButtonNewsletter);
     }
 
     public void checkStrongPassStrength() {
-        click(pass);
-        sendKey(pass, VALID_PASSWORD.getValue());
+        sendKey(pass, STRONG_PASS.getValue());
+        click(radioButtonNewsletter);
     }
 
     public void checkVeryStrongPassStrength() {
-        click(pass);
-        sendKey(pass, VALID_PASSWORD.getValue() + "aa");
+        sendKey(pass, VERY_STRONG_PASS.getValue());
+        click(radioButtonNewsletter);
     }
 
 
     public String getPassStrengthColor() {
-        waitUntilElementAppeared(passStrengthColor);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        wait.until( new ExpectedCondition<Boolean>() {
-//            public Boolean apply(WebDriver driver) {
-//                try {
-//                    printError("waiting...");
-//                    String script = "return window.getComputedStyle(document.querySelector('.password-strength-meter'),'::before').getPropertyValue('background-color')";
-//                    JavascriptExecutor js = (JavascriptExecutor) driver;
-//                    String backgroundColor = js.executeScript(script).toString();
-//                    return backgroundColor.isEmpty();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    printError("not found");
-//                    return false;
-//                }
-//            }
-//        });
-//        wait.until( new ExpectedCondition<Boolean>() {
-//            public Boolean apply(WebDriver driver) {
-//                try {
-//                    printError("waiting...");
-//                    String script = "return window.getComputedStyle(document.querySelector('.password-strength-meter'),'::before')";
-//                    JavascriptExecutor js = (JavascriptExecutor) driver;
-//                    WebElement element = (WebElement) js.executeScript(script);
-//                    printError(element.toString());
-//                    return backgroundColor.isEmpty();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    printError("not found");
-//                    return false;
-//                }
-//            }
-//        });
+        waitUntilColorToBeAppeared(pass);
         String script = "return window.getComputedStyle(document.querySelector('.password-strength-meter'),'::before').getPropertyValue('background-color')";
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String color = js.executeScript(script).toString();
@@ -219,7 +186,6 @@ public class RegistrationPage extends BasePage {
 
 
     public String getUsedEmailErrorText() {
-        printError(usedEmailError.toString());
         return getText(usedEmailError);
     }
 

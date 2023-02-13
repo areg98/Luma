@@ -5,9 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static Enums.SignInPageEnum.*;
-import static utils.CustomWebElement.click;
-import static utils.CustomWebElement.sendKey;
+import static Constants.SignInPageEnum.*;
+import static utils.CustomWebElement.*;
 import static utils.WaitHelper.waitUntilElementAppeared;
 
 public class SignInPage extends BasePage {
@@ -53,7 +52,7 @@ public class SignInPage extends BasePage {
         sendKey(userNameField, INVALID_EMAIL.getValue());
         sendKey(passField, INVALID_PASSWORD.getValue());
         click(submitButton);
-        return incorrectSignInError.getText();
+        return getText(incorrectSignInError);
 
     }
 
@@ -61,7 +60,7 @@ public class SignInPage extends BasePage {
         sendKey(userNameField, "");
         sendKey(passField, VALID_PASSWORD.getValue());
         click(submitButton);
-        return emailError.getText();
+        return getText(emailError);
 
     }
 
@@ -69,24 +68,24 @@ public class SignInPage extends BasePage {
         sendKey(userNameField, VALID_EMAIL.getValue());
         sendKey(passField, "");
         click(submitButton);
-        return passError.getText();
+        return getText(passError);
 
     }
 
     public String getBaseText(){
-        return baseText.getText();
+        return getText(baseText);
     }
 
     public String getLoginText() {
-        return loginText.getText();
+        return getText(loginText);
     }
 
     public String getRegisteredUserTest() {
-        return registeredUserText.getText();
+        return getText(registeredUserText);
     }
 
     public String getNewCustomerText() {
-        return newCustomerText.getText();
+        return getText(newCustomerText);
     }
 
     public void clickOnCreateAnAccountButton() {

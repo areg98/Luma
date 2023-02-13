@@ -1,47 +1,31 @@
-import Pages.BasePage;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterGroups;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeMethod;
-import utils.Configurations;
 
-import java.time.Duration;
-
-import static utils.CustomWebDriver.getDriver;
-import static utils.CustomWebDriver.setDriver;
+import static utils.CustomWebDriver.*;
 
 public class BaseTest {
-    private static WebDriver driver;
-    private static String siteUrl = Configurations.URL;
+    //    private static WebDriver driver;
+//    private static String siteUrl = Configurations.URL;
+//    private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
 
 
     @BeforeMethod
-    public static void beforeMethod() {
-        driver = getDriver();
-//        driver.get(Configurations.URL);
-//        basePage.get();
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    public void beforeMethod() {
+        System.out.println("Before Test Thread ID: " + Thread.currentThread().getId());
+        setDriver();
     }
+
+//    public WebDriver getThreadLocalDriver() {
+//        return threadLocalDriver.get();
+//    }
 
     @AfterMethod
-    public static void afterMethod() {
-        if (driver != null) {
-            driver.quit();
+    public void afterMethod() {
+        if (getDriver() != null) {
+            quitDriver();
+            removeDriverThreadLocal();
         }
-        setDriver(null);
     }
 
-    @BeforeGroups({"password", "labels"})
-    public static void beforeGroups() {
-        driver = getDriver();
-    }
-
-    @AfterGroups({"password", "labels"})
-    public static void afterGroups() {
-        if (driver != null) {
-            driver.quit();
-        }
-        setDriver(null);
-    }
 }

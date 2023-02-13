@@ -1,0 +1,1 @@
+{"uuid":"168bd4fc-7b14-4cb3-b81b-c4364fbffb6c","name":"MyAccountTest.init","children":["c7987b31-8457-485f-87c3-a08d698ba32e"],"description":"","befores":[{"name":"init","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1674047768008,"stop":1674047774868}],"afters":[],"links":[],"start":1674047768008,"stop":1674047774868}

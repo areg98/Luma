@@ -7,49 +7,63 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+
+import java.time.Duration;
+import java.util.Objects;
+
+import static utils.Configurations.BROWSER_TYPE;
+
 
 public class CustomWebDriver {
-    static WebDriver driver = null;
 
-    private static ChromeOptions setChromeOptions() {
+    private static WebDriver driver = null;
+    private static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
+
+    public CustomWebDriver() {
+    }
+
+    private static ChromeOptions chromeOptions() {
         WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
-        return options;
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("start-maximized");
+        return chromeOptions;
     }
 
-    private static FirefoxOptions setFirefoxOptions(){
-        WebDriverManager.firefoxdriver().setup();
-        FirefoxOptions options = new FirefoxOptions();
-        options.addArguments("start-maximized");
-        return options;
-    }
-
-    private static EdgeOptions setEdgeOptions(){
+    private static EdgeOptions edgeOptions() {
         WebDriverManager.edgedriver().setup();
-        EdgeOptions options = new EdgeOptions();
-        options.addArguments("start-maximized");
-        return options;
+        EdgeOptions edgeOptions = new EdgeOptions();
+        edgeOptions.addArguments("start-maximized");
+        return edgeOptions;
     }
 
-    public static WebDriver getDriver(){
-        if (Configurations.BROWSER_TYPE.equalsIgnoreCase("chrome") && driver == null) {
-            driver = new ChromeDriver(setChromeOptions());
-        }
-        else if (Configurations.BROWSER_TYPE.equalsIgnoreCase("firefox") && driver == null) {
-//            driver = new FirefoxDriver(setFirefoxOptions());
-            System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
-            driver = new FirefoxDriver();
-            driver.manage().window().maximize();
-        }
-        else if(Configurations.BROWSER_TYPE.equalsIgnoreCase("edge") && driver == null){
-            driver = new EdgeDriver(setEdgeOptions());
-        }
-        return driver;
+    public static void removeDriverThreadLocal() {
+        threadLocal.remove();
     }
 
-    public static void setDriver(WebDriver driver){
-       CustomWebDriver.driver = driver;
+    public static WebDriver getDriver() {
+        return Objects.requireNonNull(threadLocal.get());
+    }
+
+    public static void quitDriver() {
+        getDriver().quit();
+    }
+
+    public static void setDriver() {
+        switch (BROWSER_TYPE) {
+            case "chrome" -> driver = new ChromeDriver(chromeOptions());
+            case "edge" -> {
+                System.setProperty("webdriver.edge.driver", "src/main/resources/msedgedriver.exe");
+                driver = new EdgeDriver(edgeOptions());
+            }
+            case "firefox" -> {
+                System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
+                driver = new FirefoxDriver();
+                driver.manage().window().maximize();
+            }
+            default -> CustomWebElement.printInfo("WRONG BROWSER NAME");
+        }
+        threadLocal.set(Objects.requireNonNull(driver));
+        CustomWebElement.printInfo("Waiting for driver");
+        CustomWebDriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
 }

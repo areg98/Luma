@@ -2,12 +2,15 @@ package Pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.*;
-import utils.LoadableComponent;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-import static utils.CustomWebDriver.getDriver;
+import java.util.List;
+import java.util.Random;
+
 import static utils.CustomWebElement.click;
-import static utils.WaitHelper.*;
+import static utils.CustomWebElement.getText;
+import static utils.WaitHelper.waitUntilElementAppeared;
 
 public class HomePage extends BasePage {
     private static WebDriver driver;
@@ -25,6 +28,11 @@ public class HomePage extends BasePage {
     private WebElement homeErinPromo;
     @FindBy(className = "authorization-link")
     private WebElement signIn;
+    @FindBy(className = "product-item-link")
+    private List<WebElement> hotSellersList;
+    @FindBy(className = "page-title")
+    private WebElement itemTitle;
+
     private static String siteUrl = "https://magento.softwaretestingboard.com/";
 
 
@@ -85,6 +93,19 @@ public class HomePage extends BasePage {
             return true;
         else return false;
     }
+
+    public String clickOnHotSellerItem(){
+        int randomItem = new Random().nextInt(0, hotSellersList.size()-1);
+        String title =  getText(hotSellersList.get(randomItem));
+        click(hotSellersList.get(randomItem));
+        return title;
+    }
+
+    public String getItemTitleText(){
+        return getText(itemTitle);
+    }
+
+
 
     @Override
     protected void load() {

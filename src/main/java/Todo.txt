@@ -1,0 +1,17 @@
+Todo ---------------------------------------------------------------
+        ##########      ##           #####            ##
+            ##       ##    ##        ##    ##      ##    ##
+            ##      ##      ##       ##     ##    ##      ##
+            ##      ##     ##        ##     ##    ##     ##
+            ##       ##   ##         ##    ##      ##   ##
+            ##         ##            ######          ##
+ ------------------------------------------------------------------- 
+
+1. https://magento.softwaretestingboard.com/wishlist/
+2. https://magento.softwaretestingboard.com/checkout/cart/
+3. https://magento.softwaretestingboard.com/catalog/product_compare/
+4. Search entire store here...
+
+Git push
+
+
